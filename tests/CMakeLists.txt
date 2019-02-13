@@ -1,10 +1,10 @@
 # Tests
 
 file(GLOB TEST_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
-target_compile_definitions(${CMAKE_PROJECT_NAME_LOWER} PUBLIC ${QMG2SC_TARGET_DEF})
 
 add_executable(${CMAKE_PROJECT_NAME_LOWER}-tests ${TEST_FILES})
 target_include_directories(${CMAKE_PROJECT_NAME_LOWER}-tests PUBLIC ${GTEST_INCLUDE_DIRS})
+target_compile_definitions(${CMAKE_PROJECT_NAME_LOWER}-tests PUBLIC ${QMG2SC_TARGET_DEF})
 
 set(${CMAKE_PROJECT_NAME_LOWER}-LIBRARIES
         ${CMAKE_PROJECT_NAME_LOWER}
