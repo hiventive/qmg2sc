@@ -1,0 +1,10 @@
+# Settings
+
+project:
+  name: qmg2sc
+  version: 0.1.0
+
+conan:
+  name: qmg2sc
+  channel: testing
+  username: hiventive
