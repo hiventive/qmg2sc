@@ -120,9 +120,9 @@ template <unsigned int BUSWIDTH = 32> class QMG2SC : public QMG2SCIf, public ::h
     void setGDBServerActivation(const bool &activate);
     void setGDBServerParameters(const ::hv::common::hvuint16_t &port, const bool &waitForConnection);
 
-    void before_end_of_elaboration();
+    void before_end_of_elaboration() override;
 
-    void start_of_simulation();
+    void start_of_simulation() override;
 
     ::hv::communication::tlm2::protocols::memorymapped::MemoryMappedSimpleInitiatorSocket<BUSWIDTH>
         MMIOSocket;
