@@ -88,40 +88,6 @@ template <unsigned int BUSWIDTH = 32> class QMG2SC : public QMG2SCIf, public ::h
     QMG2SC(::hv::module::ModuleName name_ = ::sc_core::sc_gen_unique_name("QMG2SCModule"));
     ~QMG2SC();
 
-    void addCPU(const ::std::string &cpuName, const bool &startPoweredOff = false,
-                const ::hv::common::hvint32_t &mpAffinity = 0,
-                const ::hv::common::hvuint32_t &resetCBAR = 0u);
-    void addCPUs(const ::std::string &cpuName, const ::hv::common::hvuint32_t &nCPUs,
-                 const bool &startPoweredOff = false, const ::hv::common::hvint32_t &mpAffinity = 0,
-                 const ::hv::common::hvuint32_t &resetCBAR = 0u);
-
-    void setRAMSize(const ::std::size_t &ramSize);
-    void setVCRAMSize(const ::std::size_t &vcramSize);
-
-    void setIgnoreMemoryTransactionFailures(const bool &val);
-    void setBlockInterfaceType(const QMG2SCBlockInterfaceType &t);
-    void setNoParallel(const bool &val);
-    void setNoFloppy(const bool &val);
-    void setNoCDROM(const bool &val);
-
-    void addBlob(::hv::common::hvuint8_t *blob, const ::std::size_t size, const ::std::string &name,
-                 const ::hv::common::hvaddr_t &addr);
-
-    void setBoardId(const ::hv::common::hvint32_t &boardId);
-    void setCPUBootId(const ::hv::common::hvint32_t &cpuId);
-    void setSMPBootAddr(const ::hv::common::hvaddr_t &SMPBootAddr);
-    void setSecondaryResetSetPCToSMPBootAddr(const bool &activate);
-
-    void setKernelPath(const ::std::string &kernelPath);
-    void setKernelCommand(const ::std::string &kernelCommand);
-    void setInitRDPath(const ::std::string &initRDPath);
-    void setDTBPath(const ::std::string &dtbPath);
-
-    void setGDBServerActivation(const bool &activate);
-    void setGDBServerParameters(const ::hv::common::hvuint16_t &port, const bool &waitForConnection);
-
-    void before_end_of_elaboration() override;
-
     void start_of_simulation() override;
 
     ::hv::communication::tlm2::protocols::memorymapped::MemoryMappedSimpleInitiatorSocket<BUSWIDTH>
@@ -137,14 +103,6 @@ template <unsigned int BUSWIDTH = 32> class QMG2SC : public QMG2SCIf, public ::h
     void incomingIRQOut();
 
     void mIRQInBTransport(irq_payload_type &txn, ::sc_core::sc_time &t);
-
-    //** QMG CPU, machine and boot settings **//
-    ::std::vector<QMGCPUInfo> cpus;
-    ::std::vector<QMGBlobInfo> blobs;
-    QMGCPUsInfo mQMGCPUInfo = {0};
-    QMGMachineInfo mQMGMachineInfo = {0};
-    QMGBootInfo mQMGBootInfo = {0};
-    QMGDebugInfo mQMGDebugInfo = {0};
 
     ::std::thread mQMGStartThread;
 
