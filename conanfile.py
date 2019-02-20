@@ -18,7 +18,7 @@ class Qmg2ScConan(ConanFile):
                "systemc/[~2.3.2]@hiventive/stable", \
                "module/0.2.0@hiventive/testing", \
                "communication/0.1.0@hiventive/testing", \
-               "qmg/0.1.0@hiventive/testing"
+               "qmg/0.2.0@hiventive/testing"
 
     def _configure_cmake(self):
         cmake = CMake(self)
