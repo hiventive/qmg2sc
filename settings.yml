@@ -2,7 +2,7 @@
 
 project:
   name: qmg2sc
-  version: 0.1.0
+  version: 0.2.0
 
 conan:
   name: qmg2sc
