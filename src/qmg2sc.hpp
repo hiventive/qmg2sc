@@ -18,6 +18,10 @@ QMG2SC<BUSWIDTH>::QMG2SC(::hv::module::ModuleName name_)
 
     QMGInit((void *)this);
 
+    QMGRegisterMMIOBTransport(QMG2SCMMIOBTransport);
+    QMGRegisterMMIOGetDirectMemPtr(QMG2SCMMIOGetDirectMemPtr);
+    QMGRegisterIRQBTransport(QMG2SCIRQOutBTransport);
+
     SC_METHOD(incomingIRQOut);
     sensitive << mIncomingIRQOutEvent;
     dont_initialize();
