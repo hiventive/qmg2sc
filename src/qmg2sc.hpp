@@ -32,7 +32,9 @@ QMG2SC<BUSWIDTH>::QMG2SC(::hv::module::ModuleName name_)
 }
 
 template <unsigned int BUSWIDTH> QMG2SC<BUSWIDTH>::~QMG2SC() {
-    mQMGStartThread.join();
+	if(mQMGStartThread.joinable()) {
+		mQMGStartThread.join();
+	}
 }
 
 template <unsigned int BUSWIDTH> void QMG2SC<BUSWIDTH>::start_of_simulation() {
