@@ -118,15 +118,12 @@ find_package (PkgConfig REQUIRED)
 pkg_check_modules (GLIB REQUIRED glib-2.0)
 link_directories (${GLIB_LIBDIR})
 
-# QEMU
-set(QMG2SC_TARGET "aarch64")
-
 # Resolve base architecture
-string(TOUPPER ${QMG2SC_TARGET} QMG2SC_TARGET_UPPER)
-string(CONCAT QMG2SC_TARGET_DEF "TARGET_" ${QMG2SC_TARGET_UPPER})
-set(QMG2SC_TARGET_BASE ${QMG_TARGET})
-if("${QMG2SC_TARGET}" MATCHES "aarch64")
-    set(QMG2SC_TARGET_BASE "arm")
+# Format QMG target list
+if(QMG2SC_TARGET_LIST)
+    string(REPLACE "," ";" QMG2SC_TARGET_LIST ${QMG2SC_TARGET_LIST})
+else()
+    set(QMG2SC_TARGET_LIST "arm;aarch64")
 endif()
 
 # Library
