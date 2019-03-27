@@ -132,6 +132,10 @@ stages:
 
 .build_release_unix_make: &build_release_unix_make
   stage: build:release
+  before_script:
+    - "`python3 scripts/ci-before.py setup-env`"
+    -  python3 scripts/ci-before.py init
+    -  python3 scripts/ci-before.py clean-conan-testing
   script:
     - conan install . --build outdated
     - mkdir build
