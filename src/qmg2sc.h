@@ -83,7 +83,8 @@ template <unsigned int BUSWIDTH = 32> class QMG2SC : public QMG2SCIf, public ::h
     typedef ::hv::communication::tlm2::protocols::memorymapped::MemoryMappedPayload<
         ::hv::common::hvaddr_t>
         mmio_payload_type;
-    typedef ::hv::communication::tlm2::protocols::irq::IRQPayload irq_payload_type;
+    typedef ::hv::communication::tlm2::protocols::irq::IRQProtocolTypes irq_protocol_types;
+    typedef typename irq_protocol_types::tlm_payload_type irq_payload_type;
 
     QMG2SC(::hv::module::ModuleName name_ = ::sc_core::sc_gen_unique_name("QMG2SCModule"));
     ~QMG2SC();
@@ -92,8 +93,12 @@ template <unsigned int BUSWIDTH = 32> class QMG2SC : public QMG2SCIf, public ::h
 
     ::hv::communication::tlm2::protocols::memorymapped::MemoryMappedSimpleInitiatorSocket<BUSWIDTH>
         MMIOSocket;
-    ::hv::communication::tlm2::protocols::irq::IRQSimpleInitiatorSocket<> IRQOutSocket;
-    ::hv::communication::tlm2::protocols::irq::IRQSimpleTargetSocket<> IRQInSocket;
+    ::hv::communication::tlm2::protocols::irq::IRQSimpleInitiatorSocket<
+        irq_protocol_types, 1, ::sc_core::SC_ZERO_OR_MORE_BOUND>
+        IRQOutSocket;
+    ::hv::communication::tlm2::protocols::irq::IRQSimpleTargetSocket<
+        irq_protocol_types, 0, ::sc_core::SC_ZERO_OR_MORE_BOUND>
+        IRQInSocket;
 
   protected:
     void handleMMIOBTransport(QMGMMIOPayload *p) override;
