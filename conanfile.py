@@ -20,10 +20,10 @@ class Qmg2ScConan(ConanFile):
     exports = "settings.yml"
     exports_sources = "src/*", "CMakeLists.txt"
     requires = "gtest/1.8.0@bincrafters/stable", \
-               "systemc/[~2.3.2]@hiventive/stable", \
-               "module/0.2.0@hiventive/testing", \
-               "communication/0.1.0@hiventive/testing", \
-               "qmg/0.6.1@hiventive/testing"
+               "systemc/[~=2.3.2]@hiventive/stable", \
+               "module/[~=0.2.0]@hiventive/testing", \
+               "communication/[~=0.1.0]@hiventive/testing", \
+               "qmg/[~=0.6.2]@hiventive/testing"
 
     def configure(self):
         if self.options.target_aarch64:
